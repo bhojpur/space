@@ -17,14 +17,14 @@ require (
 	github.com/peterh/liner v1.2.1
 	github.com/prometheus/client_golang v1.12.1
 	github.com/streadway/amqp v1.0.0
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.0
 	github.com/xdg/scram v1.0.5
 	github.com/yuin/gopher-lua v0.0.0-20200816102855-ee81675732da
 	go.uber.org/zap v1.13.0
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
 	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1
 	google.golang.org/api v0.30.0
-	google.golang.org/grpc v1.35.0
+	google.golang.org/grpc v1.45.0
 	layeh.com/gopher-json v0.0.0-20201124131017-552bb3c4c3bf
 )
 

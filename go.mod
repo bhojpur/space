@@ -7,7 +7,7 @@ require (
 	github.com/Azure/azure-event-hubs-go/v3 v3.3.16
 	github.com/Shopify/sarama v1.27.2
 	github.com/aws/aws-sdk-go v1.37.3
-	github.com/eclipse/paho.mqtt.golang v1.3.1
+	github.com/eclipse/paho.mqtt.golang v1.3.5
 	github.com/golang/protobuf v1.5.2
 	github.com/gomodule/redigo v1.8.3
 	github.com/google/go-querystring v1.1.0

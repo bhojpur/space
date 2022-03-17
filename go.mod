@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	cloud.google.com/go/pubsub v1.3.1
-	github.com/Azure/azure-event-hubs-go/v3 v3.3.16
+	github.com/Azure/azure-event-hubs-go/v3 v3.3.17
 	github.com/Shopify/sarama v1.27.2
 	github.com/aws/aws-sdk-go v1.37.3
 	github.com/eclipse/paho.mqtt.golang v1.3.1
@@ -30,9 +30,9 @@ require (
 
 require (
 	cloud.google.com/go v0.65.0 // indirect
-	github.com/Azure/azure-amqp-common-go/v3 v3.2.1 // indirect
+	github.com/Azure/azure-amqp-common-go/v3 v3.2.3 // indirect
 	github.com/Azure/azure-sdk-for-go v51.1.0+incompatible // indirect
-	github.com/Azure/go-amqp v0.16.0 // indirect
+	github.com/Azure/go-amqp v0.17.0 // indirect
 	github.com/Azure/go-autorest v14.2.0+incompatible // indirect
 	github.com/Azure/go-autorest/autorest v0.11.18 // indirect
 	github.com/Azure/go-autorest/autorest/adal v0.9.13 // indirect

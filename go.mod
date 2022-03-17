@@ -17,7 +17,7 @@ require (
 	github.com/peterh/liner v1.2.1
 	github.com/prometheus/client_golang v1.12.1
 	github.com/streadway/amqp v1.0.0
-	github.com/stretchr/testify v1.6.1
+	github.com/stretchr/testify v1.7.1
 	github.com/xdg/scram v1.0.5
 	github.com/yuin/gopher-lua v0.0.0-20200816102855-ee81675732da
 	go.uber.org/zap v1.13.0

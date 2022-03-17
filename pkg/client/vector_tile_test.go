@@ -1,0 +1,107 @@
+package client
+
+// Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+import (
+	"fmt"
+	"testing"
+)
+
+func TestDraw(t *testing.T) {
+	var tile Tile
+	layer := tile.AddLayer("make love to magical numbers")
+	feature := layer.AddFeature(LineString)
+	feature.AddTag("anti", "freeze")
+	feature.AddTag("should be consumed", false)
+	feature.SetID(100)
+	feature.LineTo(256, 256)
+
+	pb := tile.Render()
+
+	if fmt.Sprintf("%v", pb) != "[26 94 10 28 109 97 107 101 32 108 111 118 101 32 116 111 32 109 97 103 105 99 97 108 32 110 117 109 98 101 114 115 18 20 8 100 18 4 0 0 1 1 24 2 34 8 9 0 0 10 128 64 128 64 26 4 97 110 116 105 26 18 115 104 111 117 108 100 32 98 101 32 99 111 110 115 117 109 101 100 34 8 10 6 102 114 101 101 122 101 34 2 56 0 120 2]" {
+		t.Fatal("fatal bad no no")
+	}
+}
+
+func TestLatLonXY(t *testing.T) {
+	x, y := LatLonXY(33.4131, -111.9396, 6195, 13154, 15)
+	if fmt.Sprintf("%0.5f %0.5f", x, y) != "2.26645 0.06180" {
+		t.Fatal("baddness. ah so sad")
+	}
+}
+
+func TestTileBounds(t *testing.T) {
+	minLat, minLon, maxLat, maxLon := TileBounds(6195, 13154, 15)
+	r := fmt.Sprintf("%0.5f %0.5f %0.5f %0.5f", minLat, minLon, maxLat, maxLon)
+	if r != "33.40393 -111.93970 33.41310 -111.92871" {
+		t.Fatal("oh no this aint ok")
+	}
+	minLat, minLon, maxLat, maxLon = TileBounds(0, 0, 1)
+	r = fmt.Sprintf("%0.5f %0.5f %0.5f %0.5f", minLat, minLon, maxLat, maxLon)
+	if r != "0.00000 -180.00000 85.05113 0.00000" {
+		t.Fatal("whoops we did a bummer")
+	}
+
+	minLat, minLon, maxLat, maxLon = TileBounds(3, 2, 2) // Google ZXY 232
+	r = fmt.Sprintf("%0.5f %0.5f %0.5f %0.5f", minLat, minLon, maxLat, maxLon)
+	if r != "-66.51326 90.00000 0.00000 180.00000" {
+		t.Fatal("whoops we did a bummer")
+	}
+	// rect := geometry.Rect{
+	// 	Min: geometry.Point{X: minLon, Y: minLat},
+	// 	Max: geometry.Point{X: maxLon, Y: maxLat},
+	// }
+
+	// pt := geometry.Point{X: -179.995241, Y: -20.841812}
+
+	// fmt.Printf("[\n  [%f,%f]\n  [%f,%f]\n]\n[%f,%f]\n",
+	// 	rect.Min.X, rect.Min.Y, rect.Max.X, rect.Max.Y, pt.X, pt.Y)
+
+	// x, y := LatLonXY(pt.Y, pt.X, 3, 2, 2)
+
+	// fmt.Printf("[%f,%f]\n", x, y)
+
+	// // exceeds lat: -20.841812, lon: -179.995241, px: -767.986462, py: 60.635757 (tile: x: 3, y: 2, z: 2)
+
+	// exceeds lat: -4.405991, lon: -179.976782, px: -767.933959, py: 12.544966 (tile: x: 3, y: 2, z: 2)
+	// exceeds lat: -56.082370, lon: -179.911005, px: -767.746858, py: 193.552675 (tile: x: 3, y: 2, z: 2)
+}
+
+func TestParallelLayerPop(t *testing.T) {
+	var tile Tile
+	points := tile.AddLayer("layer-points")
+	polygons := tile.AddLayer("layer-polygons")
+
+	f1 := points.AddFeature(Point)
+	f1.MoveTo(100, 100)
+	f1.ClosePath()
+
+	f2 := polygons.AddFeature(Polygon)
+	f2.MoveTo(100, 100)
+	f2.MoveTo(50, 100)
+	f2.MoveTo(0, 0)
+	f2.ClosePath()
+
+	if len(tile.layers) != 2 || len(tile.layers[0].features) != 1 ||
+		len(tile.layers[1].features) != 1 {
+		t.Fatal("Failed to populate tile layers in parallel")
+	}
+}

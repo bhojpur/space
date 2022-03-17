@@ -1,0 +1,95 @@
+package geojson
+
+// Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+import (
+	"math/rand"
+	"testing"
+
+	"github.com/bhojpur/space/pkg/utils/geojson/geometry"
+)
+
+func TestPointParse(t *testing.T) {
+	p := expectJSON(t, `{"type":"Point","coordinates":[1,2,3]}`, nil)
+	expect(t, p.Center() == P(1, 2))
+	expectJSON(t, `{"type":"Point","coordinates":[1,null]}`, errCoordinatesInvalid)
+	expectJSON(t, `{"type":"Point","coordinates":[1,2],"bbox":null}`, nil)
+	expectJSON(t, `{"type":"Point"}`, errCoordinatesMissing)
+	expectJSON(t, `{"type":"Point","coordinates":null}`, errCoordinatesInvalid)
+	expectJSON(t, `{"type":"Point","coordinates":[1,2,3,4,5]}`, `{"type":"Point","coordinates":[1,2,3,4]}`)
+	expectJSON(t, `{"type":"Point","coordinates":[1]}`, errCoordinatesInvalid)
+	expectJSON(t, `{"type":"Point","coordinates":[1,2,3],"bbox":[1,2,3,4]}`, `{"type":"Point","coordinates":[1,2,3],"bbox":[1,2,3,4]}`)
+}
+func TestPointParseValid(t *testing.T) {
+	json := `{"type":"Point","coordinates":[190,90]}`
+	expectJSON(t, json, nil)
+	expectJSONOpts(t, json, errCoordinatesInvalid, &ParseOptions{RequireValid: true})
+}
+
+func TestPointVarious(t *testing.T) {
+	var g Object = PO(10, 20)
+	expect(t, string(g.AppendJSON(nil)) == `{"type":"Point","coordinates":[10,20]}`)
+	expect(t, g.Rect() == R(10, 20, 10, 20))
+	expect(t, g.Center() == P(10, 20))
+	expect(t, !g.Empty())
+}
+
+func TestPointValid(t *testing.T) {
+	var g Object = PO(0, 20)
+	expect(t, g.Valid())
+
+	var g1 Object = PO(10, 20)
+	expect(t, g1.Valid())
+}
+
+func TestPointInvalidLargeX(t *testing.T) {
+	var g Object = PO(10, 91)
+	expect(t, !g.Valid())
+}
+
+func TestPointInvalidLargeY(t *testing.T) {
+	var g Object = PO(181, 20)
+	expect(t, !g.Valid())
+}
+
+func TestPointValidLargeX(t *testing.T) {
+	var g Object = PO(180, 20)
+	expect(t, g.Valid())
+}
+
+func TestPointValidLargeY(t *testing.T) {
+	var g Object = PO(180, 90)
+	expect(t, g.Valid())
+}
+
+func BenchmarkPointValid(b *testing.B) {
+	points := make([]*Point, b.N)
+	for i := 0; i < b.N; i++ {
+		points[i] = NewPoint(geometry.Point{
+			X: rand.Float64()*400 - 200, // some are out of bounds
+			Y: rand.Float64()*200 - 100, // some are out of bounds
+		})
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		points[i].Valid()
+	}
+}

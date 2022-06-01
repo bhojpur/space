@@ -15,7 +15,7 @@ require (
 	github.com/mmcloughlin/geohash v0.10.0
 	github.com/nats-io/nats.go v1.13.1-0.20220308171302-2f2f6968e98d
 	github.com/peterh/liner v1.2.1
-	github.com/prometheus/client_golang v1.12.1
+	github.com/prometheus/client_golang v1.12.2
 	github.com/streadway/amqp v1.0.0
 	github.com/stretchr/testify v1.6.1
 	github.com/xdg/scram v1.0.5

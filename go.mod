@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/pubsub v1.3.1
 	github.com/Azure/azure-event-hubs-go/v3 v3.3.16
 	github.com/Shopify/sarama v1.27.2
-	github.com/aws/aws-sdk-go v1.37.3
+	github.com/aws/aws-sdk-go v1.44.89
 	github.com/eclipse/paho.mqtt.golang v1.3.1
 	github.com/golang/protobuf v1.5.2
 	github.com/gomodule/redigo v1.8.3
@@ -21,8 +21,8 @@ require (
 	github.com/xdg/scram v1.0.5
 	github.com/yuin/gopher-lua v0.0.0-20200816102855-ee81675732da
 	go.uber.org/zap v1.13.0
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
-	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1
+	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd
+	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
 	google.golang.org/api v0.30.0
 	google.golang.org/grpc v1.35.0
 	layeh.com/gopher-json v0.0.0-20201124131017-552bb3c4c3bf

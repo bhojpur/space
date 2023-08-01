@@ -7,7 +7,7 @@ require (
 	github.com/Azure/azure-event-hubs-go/v3 v3.3.16
 	github.com/Shopify/sarama v1.27.2
 	github.com/aws/aws-sdk-go v1.37.3
-	github.com/eclipse/paho.mqtt.golang v1.3.1
+	github.com/eclipse/paho.mqtt.golang v1.4.3
 	github.com/golang/protobuf v1.5.2
 	github.com/gomodule/redigo v1.8.3
 	github.com/google/go-querystring v1.1.0
@@ -21,8 +21,8 @@ require (
 	github.com/xdg/scram v1.0.5
 	github.com/yuin/gopher-lua v0.0.0-20200816102855-ee81675732da
 	go.uber.org/zap v1.13.0
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
-	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1
+	golang.org/x/net v0.8.0
+	golang.org/x/term v0.6.0
 	google.golang.org/api v0.30.0
 	google.golang.org/grpc v1.35.0
 	layeh.com/gopher-json v0.0.0-20201124131017-552bb3c4c3bf
@@ -54,7 +54,7 @@ require (
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/googleapis/gax-go/v2 v2.0.5 // indirect
-	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/go-uuid v1.0.2 // indirect
 	github.com/jcmturner/gofork v1.0.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
@@ -82,9 +82,9 @@ require (
 	golang.org/x/lint v0.0.0-20200302205851-738671d3881b // indirect
 	golang.org/x/mod v0.3.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20210514164344-f6687ab2804c // indirect
-	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a // indirect
-	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/sync v0.1.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
 	golang.org/x/tools v0.0.0-20200825202427-b303f430e36d // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/appengine v1.6.6 // indirect

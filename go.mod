@@ -19,7 +19,7 @@ require (
 	github.com/streadway/amqp v1.0.0
 	github.com/stretchr/testify v1.6.1
 	github.com/xdg/scram v1.0.5
-	github.com/yuin/gopher-lua v0.0.0-20200816102855-ee81675732da
+	github.com/yuin/gopher-lua v1.1.1
 	go.uber.org/zap v1.13.0
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
 	golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1
